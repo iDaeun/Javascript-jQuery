@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>회원관리</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #main_wrap {
+            width: 474px;
+
+            /*확인용!*/
+            /*height: 500px;*/
+
+            margin: 0 auto;
+            margin-top: 15px;
+
+            padding: 10px;
+
+            background-image: url(disco-dba865f1.png);
+            background-size: 100%;
+            /*background-color: rgba(140, 122, 230, 1.0);*/
+            border: 3px solid black;
+            border-radius: 5px;
+        }
+
+        .title {
+            font-size: 28px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 2px solid;
+            margin: 10px 0;
+        }
+
+        #regBox,
+        #memberlist {
+            background-color: rgba(245, 246, 250, 0.3);
+        }
+
+        #regBox>form>table {
+            width: 100%;
+        }
+
+        #regBox>form>table td {
+            width: 25%;
+            padding: 5px;
+        }
+
+        .input {
+            width: 100%;
+            font-size: 16px;
+            padding: 3px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        input[type=submit] {
+            background-color: gray;
+            font-size: 13px;
+            font-weight: bold;
+            border: 2px solid black;
+            padding: 7px 7px;
+        }
+
+        .table {
+            width: 100%;
+            /*셀과 셀 사이의 간격을 좁혀놓음*/
+            border-collapse: collapse;
+        }
+
+        .table td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid gray;
+            background-color: rgba(245, 246, 250, 0.8);
+        }
+
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main_wrap">
+        <h1 class="title" style="text-align:center; background-color: rgba(245, 246, 250,0.3);">MEMBER MANAGER</h1>
+        <hr>
+        <div id="regBox">
+            <h3>■ 회원등록</h3>
+            <!-- action="#" method="post"-->
+            <form id="regForm" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <!--<label for="useId">아이디(이메일)</label>-->
+                            <input type="text" id="userId" name="userId" class="input" placeholder="아이디(이메일)">
+                        </td>
+                        <td>
+                            <!--<label for="usePw">비밀번호</label>-->
+                            <input type="password" id="userPw" name="userPw" class="input" placeholder="비밀번호">
+                        </td>
+                        <td>
+                            <!--<label for="userName">이름</label>-->
+                            <input type="text" id="userName" name="userName" class="input" placeholder="이름">
+                        </td>
+                        <td style="vertical-align: bottom">
+                            <input type="submit" value="등록">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <hr>
+
+        <h3 style="background-color: rgba(245, 246, 250,0.3)">■ 회원리스트</h3>
+        <div id="memberlist">
+            <table class="table">
+                <tbody id="listRow">
+                    <tr>
+                        <td>순번(index)</td>
+                        <td>아이디</td>
+                        <td>비밀번호</td>
+                        <td>이름</td>
+                        <td>관리</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        //Member 객체들을 저장하기 위한 배열 생성
+        var members = [];
+
+        //회원 데이터 저장 목적으로 하는 생성자함수 정의
+        //id: 회원의 아이디, 이메일주소
+        //pw: 비밀번호
+        //name: 회원의 이름
+        //메소드: 사용자의 데이터를 가지고 html텍스트를 완성하는 메소드
+
+        function Member(id, pw, name) {
+            this.userId = id;
+            this.userPw = pw;
+            this.userName = name;
+        }
+
+        Member.prototype.makeHtml = function(index) {
+
+            var nHTML = '';
+            nHTML += '<tr>\n';
+            nHTML += '  <td>' + index + '</td>\n';
+            nHTML += '  <td>' + this.userId + '</td>\n';
+            nHTML += '  <td>' + this.userPw + '</td>\n';
+            nHTML += '  <td>' + this.userName + '</td>\n';
+            nHTML += '  <td><a onclick="editMember(' + index + ')">수정</a> | <a onclick="delMember(' + index + ')">삭제</a></td>\n';
+            nHTML += '</tr>\n';
+
+            return nHTML;
+        };
+
+        Member.prototype.showData = function() {
+            alert('아이디:' + this.userId + ' \n비밀번호:' + this.userPw + ' \n이름: ' + this.userName);
+        };
+        
+        //표 만들기 전:
+/*        Member.prototype.toString = function() {
+            var str = '<h4>아이디: ' + this.userId + ' | 비밀번호: ' + this.userPw + ' | 이름: ' + this.userName + '</h4>\n';
+
+            return str;
+        };*/
+
+        /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ON LOAD  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+        window.onload = function() {
+
+            //regForm 문서객체 만들기
+            var regForm = document.getElementById('regForm');
+
+            regForm.onsubmit = function() {
+                //사용자 입력데이터 input 캐스팅
+                var uId = document.getElementById('userId');
+                var uPw = document.getElementById('userPw');
+                var uName = document.getElementById('userName');
+
+                if (uId.value.length < 1) {
+                    alert('아이디를 입력해주세요!');
+                    uId.focus();
+                    return false;
+                }
+                if (uPw.value.length < 1) {
+                    alert('비밀번호를 입력해주세요!');
+                    uPw.focus();
+                    return false;
+                }
+                if (uName.value.length < 1) {
+                    alert('이름을 입력해주세요!');
+                    uName.focus();
+                    return false;
+                }
+
+                //새로운 데이터로 객체 생성 -> 생성자 사용
+                var newMember = new Member(uId.value, uPw.value, uName.value);
+
+                //newMember.showData();
+
+                /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+                //배열의 요소 추가 push push!!!! -> 변경
+                members.push(newMember);
+                alert('정상적으로 입력되었습니다~');
+
+                /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+                setListTable();
+
+                regForm.reset();
+                return false;
+            };
+
+        };
+
+        //members 배열의 요소들을 출력하는 기능
+        function setListTable() {
+            //body에 원래 있었던 리스트가 유지되고 밑에 추가되는게 아니라 -> 새로운 데이터가 저장되는 것!
+            //따라서 위에 순번 웅앵웅 부분은 다시 써줘야 한다!!!
+            var newHTML = '<tr>\n   <td>순번(index)</td>\n    <td>아이디</td>\n  <td>비밀번호</td>\n  <td>이름</td>\n   <td>관리</td>\n   </tr>\n';
+
+            for (var i = 0; i < members.length; i++) {
+                /*newHTML += members[i].toString() + "\n";*/
+                newHTML += members[i].makeHtml(i);
+            }
+            document.getElementById('listRow').innerHTML = newHTML;
+            /*document.getElementById('memberlist').innerHTML = newHTML;*/
+        }
+
+        function editMember(index) {
+            alert(index + '번 요소 수정');
+        }
+
+        function delMember(index) {
+            alert(index + '번 요소 삭제');
+        }
+    </script>
+</body></html>
