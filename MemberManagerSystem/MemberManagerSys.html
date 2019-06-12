@@ -59,7 +59,8 @@
             margin-top: 5px;
         }
 
-        input[type=submit], input[type=button] {
+        input[type=submit],
+        input[type=button] {
             background-color: gray;
             font-size: 13px;
             font-weight: bold;
@@ -109,7 +110,7 @@
         <div id="regBox">
             <h3>■ 회원등록</h3>
             <!-- action="#" method="post"-->
-            <form id="regForm" method="post">
+            <form id="regForm">
                 <table>
                     <tr>
                         <td>
@@ -155,8 +156,7 @@
     <!--회원 수정 테이블 start-->
     <div id="editbox">
         <h3>■ 회원 정보 수정</h3>
-        <!-- method="post"-->
-        <form id="editForm">
+        <form id="editForm" method="post">
             <table style="margin: 0 auto; padding: 15px;">
                 <tr>
                     <td>아이디</td>
@@ -184,11 +184,16 @@
     </div>
     <!--회원 수정 테이블 end-->
 
-
-
     <script>
         //Member 객체들을 저장하기 위한 배열 생성
-        var members = [];
+        //var members = [];
+
+        //저장소 변수 선언
+        //localStorage에서 데이터 유무에 따라서 배열 선언
+
+        var members;
+        /* alert(localStorage.getItem('members'));*/
+
 
         //회원 데이터 저장 목적으로 하는 생성자함수 정의
         //id: 회원의 아이디, 이메일주소
@@ -231,6 +236,21 @@
 
         window.onload = function() {
 
+            if (localStorage.getItem('members') == null) { //default: false
+                /// == null
+                //최초 실행
+                members = [];
+
+                //localStorage에 배열을 저장
+                //JSON타입의 문자열로 저장
+                localStorage.setItem('members', JSON.stringify(members));
+            } else {
+                // != null
+                // localStorage에 members 각 존재
+                members = JSON.parse(localStorage.getItem('members'));
+                setListTable();
+            }
+
             //regForm 문서객체 만들기
             var regForm = document.getElementById('regForm');
 
@@ -265,6 +285,9 @@
                 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
                 //배열의 요소 추가 push push!!!! -> 변경
                 members.push(newMember);
+
+                localStorage.setItem('members', JSON.stringify(members));
+
                 alert('정상적으로 입력되었습니다~');
 
                 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
@@ -309,21 +332,23 @@
                 members[editIndex.value].userPw = editPw.value;
                 //이름 수정
                 members[editIndex.value].userName = editName.value;
-
+                
+                localStorage.setItem('members', JSON.stringify(members));
+                
                 alert('수정되었습니다!');
                 setListTable();
 
                 editForm.reset();
-                
+
                 /*수정폼 숨겨지도록*/
                 document.getElementById('editbox').style.display = 'none';
 
                 return false;
             };
-            
+
             var cBtn = document.getElementById('cancel');
-            cBtn.onclick = function(){
-                 document.getElementById('editbox').style.display = 'none';
+            cBtn.onclick = function() {
+                document.getElementById('editbox').style.display = 'none';
             };
         };
 
@@ -337,7 +362,15 @@
 
             for (var i = 0; i < members.length; i++) {
                 /*newHTML += members[i].toString() + "\n";*/
-                newHTML += members[i].makeHtml(i);
+                /*newHTML += members[i].makeHtml(i);*/
+
+                newHTML += '<tr>\n';
+                newHTML += '  <td>' + i + '</td>\n';
+                newHTML += '  <td>' + members[i].userId + '</td>\n';
+                newHTML += '  <td>' + members[i].userPw + '</td>\n';
+                newHTML += '  <td>' + members[i].userName + '</td>\n';
+                newHTML += '  <td><a onclick="editMember(' + i + ')">수정</a> | <a onclick="delMember(' + i + ')">삭제</a></td>\n';
+                newHTML += '</tr>\n';
             }
             document.getElementById('listRow').innerHTML = newHTML;
             /*document.getElementById('memberlist').innerHTML = newHTML;*/
@@ -367,13 +400,14 @@
         }
 
         function delMember(index) {
-            alert(index + '번 요소 삭제');
-            
+            /*alert(index + '번 요소 삭제');*/
+
             var delChk = confirm('삭제하시겠습니까?');
-            
-            if(delChk){
+
+            if (delChk) {
                 //삭제 -> 배열에서 요소 삭제
-                members.splice(index,1);
+                //(start index, 삭제할 요소 개수)
+                members.splice(index, 1);
                 alert('삭제되었습니다.');
                 
                 /*삭제하고 난 뒤, 리스트 갱신해줌*/
