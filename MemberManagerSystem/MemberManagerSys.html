@@ -408,6 +408,9 @@
                 //삭제 -> 배열에서 요소 삭제
                 //(start index, 삭제할 요소 개수)
                 members.splice(index, 1);
+                
+                localStorage.setItem('members',JSON.stringify(members));
+                
                 alert('삭제되었습니다.');
                 
                 /*삭제하고 난 뒤, 리스트 갱신해줌*/
