@@ -336,6 +336,7 @@
                 localStorage.setItem('members', JSON.stringify(members));
                 
                 alert('수정되었습니다!');
+                 document.getElementById('main_wrap').style.filter = 'none';
                 setListTable();
 
                 editForm.reset();
@@ -382,7 +383,8 @@
             eBox.style.display = 'block';
             */
             document.getElementById('editbox').style.display = 'block';
-
+            document.getElementById('main_wrap').style.filter = 'blur(10px)';
+            
             alert(index + '번 요소 수정');
 
             /*수정 폼의 아이디, 비밀번호, 이름 input 캐스팅*/
