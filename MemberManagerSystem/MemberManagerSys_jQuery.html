@@ -108,8 +108,8 @@
         <!--데이터 입력 영역 start-->
         <div id="regBox">
             <h3>■ 회원등록</h3>
-            <!--method="post"-->
-            <form id="regForm">
+            <!---->
+            <form id="regForm" method="post">
                 <table>
                     <tr>
                         <td>
@@ -152,8 +152,7 @@
     <!--회원 수정 테이블 start-->
     <div id="editbox">
         <h3>■ 회원 정보 수정</h3>
-        <!--method="post"-->
-        <form id="editForm">
+        <form id="editForm" method="post">
             <table style="margin: 0 auto; padding: 15px;">
                 <tr>
                     <td>아이디</td>
@@ -214,6 +213,7 @@
                 var uId = $('#userId').val();
                 var uPw = $('#userPw').val();
                 var uName = $('#userName').val();
+                
                 //유효성 검사
                 if (uId.length < 1) {
                     alert('아이디를 입력해주세요');
@@ -238,11 +238,13 @@
                 alert('정상적으로 입력되었습니다~');
                 setListTable();
                 $('#regForm').reset();
+                
+                alert('test');
                 return false;
             });
 
             //수정된 폼의 submit재정의
-            $('#editFrom').submit(function() {
+            $('#editForm').submit(function() {
                 //캐스팅
                 var editId = $('#editId').val();
                 var editPw = $('#editPw').val();
@@ -272,10 +274,11 @@
 
                 localStorage.setItem('members', JSON.stringify(members));
                 alert('수정되었습니다!');
+                setListTable();
+                $('#editForm').reset();
+
                 //뒷배경 블러효과 없애기
                 $('#main_wrap').css('filter', 'none');
-                setListTable();
-                /*editForm.reset();*/
                 //수정폼 숨기기
                 $('#editbox').css('display', 'none');
                 return false;
@@ -292,14 +295,13 @@
         function setListTable() {
             var newHTML = '<tr>\n   <td>순번(index)</td>\n    <td>아이디</td>\n  <td>비밀번호</td>\n  <td>이름</td>\n   <td>관리</td>\n   </tr>\n';
 
-            /*$.each(members, function(index, item)*/
             for (var i = 0; i < members.length; i++) {
                 newHTML += '<tr>\n';
                 newHTML += '  <td>' + i + '</td>\n';
                 newHTML += '  <td>' + members[i].userId + '</td>\n';
                 newHTML += '  <td>' + members[i].userPw + '</td>\n';
                 newHTML += '  <td>' + members[i].userName + '</td>\n';
-                newHTML += '  <td><a id="edit" onclick="editMember(' + i + ')">수정</a> | <a id="del" onclick="delMember(' + i + ')">삭제</a></td>\n';
+                newHTML += '  <td><a onclick="editMember(' + i + ')">수정</a> | <a onclick="delMember(' + i + ')">삭제</a></td>\n';
                 newHTML += '</tr>\n';
             }
             $('#listRow').html(newHTML);
