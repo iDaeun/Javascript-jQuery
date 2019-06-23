@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <title>Daeun_Naver_1</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(245, 246, 247);
+        }
+
+        /*header*/
+        #header {
+            padding: 30px;
+            margin: 30px;
+            text-align: center;
+        }
+
+        #logo {
+            width: 200px;
+        }
+
+        img {
+            width: 14px;
+        }
+
+        input {
+            height: 25px;
+            border: 1px solid gray;
+        }
+
+        /*wrap*/
+        #wrap {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        #box {
+            border: 1px solid black;
+            width: 100%;
+            height: 40px;
+        }
+
+        /*footer*/
+        #footer {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 50%;
+            text-align: center;
+            font-size: 5px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+
+
+
+        }); //ready()
+    </script>
+</head>
+
+<body>
+    <div id="header">
+        <img id="logo" src="naver_logo.png">
+    </div>
+
+    <div id="wrap">
+        <div id="id">
+            아이디
+            <div id="box">
+                <input type="text" style="width: 70%"> @naver.com
+            </div>
+        </div>
+
+        <div id="pw">
+            비밀번호
+            <div id="box">
+
+                <input type="password" style="width: 90%"> <img src="pass.png">
+            </div>
+        </div>
+
+        <div id="pwChk">
+            비밀번호 재확인
+            <div id="box">
+                <input type="password" style="width: 90%"> <img src="pass_ok.png">
+            </div>
+        </div>
+
+        <div id="name">
+            이름
+            <div id="box">
+                <input type="text" style="width: 98%">
+            </div>
+        </div>
+
+        <div id="birth">
+            생년월일<br>
+            <div id="birth_box">
+                <input type="text" placeholder="년(4자)" style="width: 30%">
+                <select style="width: 30%">
+                    <option>월</option>
+                </select>
+                <input type="text" placeholder="일" style="width: 30%">
+            </div>
+        </div>
+
+        <div id="gender">
+            성별<br>
+            <div id="gender_box">
+                <select style="width: 100%; height: 25px">
+                    <option>여</option>
+                    <option>남</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="email">
+            본인확인 이메일<span>(선택)</span><br>
+            <div id="box">
+                <input type="email" placeholder="선택입력" style="width: 100%">
+            </div>
+        </div>
+
+        <div id="tel">
+            휴대전화<br>
+            <div id="tel_box">
+                <option>대한민국 +82</option>
+                <input type="tel" placeholder="전화번호 입력" style="width: 70%"> <button style="width: 25%">인증번호 받기</button>
+                <input type="text" placeholder="인증번호 입력하세요" style="width: 100%">
+            </div>
+        </div>
+
+        <button style="width: 100%">가입하기</button>
+
+    </div>
+
+    <div id="footer">
+        회사, 동아리 등 단체에서 사용할 ID가 필요하세요?
+        <a href="#">단체 회원 가입</a><br>
+        이용약관 | 개인정보처리방침 | 책임의 한계와 법적고지 | 회원정보 고객센터<br>
+        © NAVER Corp.
+    </div>
+
+</body></html>
