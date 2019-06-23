@@ -82,6 +82,7 @@
             width: 50%;
             text-align: center;
         }
+
     </style>
 
     <script>
@@ -108,8 +109,18 @@
                 }
             });
 
+            /*필수 사항 모두 선택해야지 다음 페이지로 이동 가능*/
+            $("#done").click(function() {
+                if (($("#check_1") && $("#check_2")).attr("src") != "checked.png") {
+                    alert("체크 해주세요!!");
+                    return false;
+                } else {
+                    $("#move_page").action();
+                }
+            });
 
         }); //ready()
+
     </script>
 </head>
 
@@ -156,7 +167,7 @@
             </div>
 
             <div class="context">
-                <img id="check_3" class="unchecked" src="unchecked.png">
+                <img class="unchecked" src="unchecked.png">
                 <span class="bold">
                     위치정보 이용약관 동의</span><span style="font-size: 80%; color: rgb(142,142,142)">(선택)</span>
                 <div class="scroll">
@@ -165,14 +176,16 @@
             </div>
 
             <div class="context">
-                <img id="check_4" class="unchecked" src="unchecked.png">
+                <img class="unchecked" src="unchecked.png">
                 <span class="bold">
                     이벤트 등 프로모션 알림 메일 수신</span><span style="font-size: 80%; color: rgb(142,142,142)">(선택)</span>
             </div>
 
             <div id="context_1">
                 <input class="button" style="background-color: rgb(142,142,142) " type="submit" value="비동의">
-                <input class="button" style="background-color: rgb(8,166,0)" type="submit" value="동의">
+                <form id="move_page" action="http://www.naver.com">
+                    <input class="button" style="background-color: rgb(8,166,0)" type="submit" value="동의" id="done">
+                </form>
             </div>
         </div>
 
@@ -188,4 +201,6 @@
 
 
 
-</body></html>
+</body>
+
+</html>

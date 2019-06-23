@@ -54,6 +54,7 @@
             text-align: center;
             font-size: 5px;
         }
+
     </style>
 
     <script>
@@ -62,6 +63,7 @@
 
 
         }); //ready()
+
     </script>
 </head>
 
@@ -74,7 +76,7 @@
         <div id="id">
             아이디
             <div id="box">
-                <input type="text" style="width: 70%"> @naver.com
+                <input type="text" style="width: 70%" required> @naver.com
             </div>
         </div>
 
@@ -82,21 +84,21 @@
             비밀번호
             <div id="box">
 
-                <input type="password" style="width: 90%"> <img src="pass.png">
+                <input type="password" style="width: 90%" required> <img src="pass.png">
             </div>
         </div>
 
         <div id="pwChk">
             비밀번호 재확인
             <div id="box">
-                <input type="password" style="width: 90%"> <img src="pass_ok.png">
+                <input type="password" style="width: 90%" required> <img src="pass_ok.png">
             </div>
         </div>
 
         <div id="name">
             이름
             <div id="box">
-                <input type="text" style="width: 98%">
+                <input type="text" style="width: 98%" required>
             </div>
         </div>
 
@@ -148,4 +150,6 @@
         © NAVER Corp.
     </div>
 
-</body></html>
+</body>
+
+</html>
