@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width" , initial-scale="1">
+    <title>test</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <style type="text/css">
+        .jumbotron {
+            background-image: url(images/TS4-RGB-p960_100_pub.pub16.1467.jpg);
+            background-size: cover;
+            text-shadow: black 0.2em 0.2em 0.2em;
+            color: white;
+        }
+    </style>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <!--iconbar -> 화면 크기 줄었을때 옆에 뜸-->
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">브랜드이름이 들어갈 부분</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!-- active : 선택이 되도록 함 -->
+                    <li class="active"><a href="#">소개<span class="sr-only"></span></a></li>
+                    <li><a href="#">강사진</a></li>
+                    <li class="dropdown">
+                        <!-- toggle 형식의 리스트 -->
+                        <!-- caret : 아래 화살표 -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">강의<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">1번</a></li>
+                            <li><a href="#">2번</a></li>
+                            <li><a href="#">3번</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- 검색창 -->
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="내용을 입력">
+                    </div>
+                    <button type="submit" class="btn btn-default">검색</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">접속하기<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">로그인</a></li>
+                            <li><a href="#">회원가입</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">큰제목 : 페이지를 소개합니다</h1>
+            <p class="text-center">조금 긴 하나의 문장을 쓸 때 사용하는 태그</p>
+            <p class="text-center">부트스트랩 = 기본적으로 CSS를 적절히 갖추고 있는 프레임워크, 하지만 독특한 디자인을 만들고 싶다면 따로 추가적인 CSS를 정의하자</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button">버튼이 만들어졌음!</a></p>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</body></html>
